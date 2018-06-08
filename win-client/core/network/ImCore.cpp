@@ -251,6 +251,7 @@ NAMESPACE_BEGIN(imcore)
 	{	
 		LOG__(NET, _T("==============================================================================="));
 
+        //在这里启动任务队列处理线程
 		getOperationManager()->startup();
 
 		CAutoLock lock(&g_lock);
@@ -258,6 +259,7 @@ NAMESPACE_BEGIN(imcore)
 		{
 #ifdef _MSC_VER
 			unsigned int m_dwThreadID;
+            //在这里启动网络IO线程
 			g_hThreadHandle = (HANDLE)_beginthreadex(0, 0, event_run, 0, 0, (unsigned*)&m_dwThreadID);
 			if (g_hThreadHandle < (HANDLE)2)
 			{

@@ -129,6 +129,8 @@ void CLoginServConn::OnConfirm()
 	uint32_t cur_conn_cnt = 0;
 	uint32_t shop_user_cnt = 0;
     
+    //连接login_server成功以后,告诉login_server自己的ip地址、端口号
+    //和当前登录的用户数量和可容纳的最大用户数量
     list<user_conn_t> user_conn_list;
     CImUserManager::GetInstance()->GetUserConnCnt(&user_conn_list, cur_conn_cnt);
 	char hostname[256] = {0};

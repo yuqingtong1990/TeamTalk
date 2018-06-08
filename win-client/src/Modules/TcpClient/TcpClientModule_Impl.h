@@ -72,6 +72,7 @@ public:
 
 private:
 	void _stopHearbeat();
+    //网络数据到来会调用该方法
 	void _handlePacketOperation(const char* data, UInt32 size);
 	void _startServerPingTimer();
 	void _stopServerPingTimer();

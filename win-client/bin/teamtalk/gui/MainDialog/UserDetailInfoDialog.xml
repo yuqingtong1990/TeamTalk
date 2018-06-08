@@ -17,7 +17,7 @@
 		<Button name="Avatar" width="150" height="160" maxheight="160" maxwidth="150" bkimage="file='MainDialog/Face.png' corner='5,5,5,5'"/>
 		<VerticalLayout padding="15,0,0,0">
 			<HorizontalLayout>
-				<Edit name="name" trans="true" readonly="true"  width="60" textcolor="#FF333333"  font="2" text="子烨" />
+				<Edit name="name" trans="true" readonly="true"  width="100" textcolor="#FF333333"  font="2" text="子烨" />
 				<Edit name="realname" readonly="true"  width="60" padding="0,8,0,0" textcolor="#FF333333"  text="廖明亮是垮蛋" />
 			</HorizontalLayout>	
 			<HorizontalLayout  padding="0,5,0,0">

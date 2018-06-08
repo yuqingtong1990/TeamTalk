@@ -67,6 +67,7 @@ int main(int argc, char* argv[])
 
 	CConfigFileReader config_file("fileserver.conf");
 
+    char* str_file_server_ip = config_file.GetConfigName("FileServerIp");
     char* str_client_listen_ip = config_file.GetConfigName("ClientListenIP");
 	char* str_client_listen_port = config_file.GetConfigName("ClientListenPort");
     char* str_msg_server_listen_ip = config_file.GetConfigName("MsgServerListenIP");
@@ -81,10 +82,10 @@ int main(int argc, char* argv[])
 
     uint16_t client_listen_port = atoi(str_client_listen_port);
  
-    CStrExplode client_listen_ip_list(str_client_listen_ip, ';');
+    CStrExplode file_server_ip_list(str_file_server_ip, ';');
     std::list<IM::BaseDefine::IpAddr> q;
-    for (uint32_t i = 0; i < client_listen_ip_list.GetItemCnt(); i++) {
-        ConfigUtil::GetInstance()->AddAddress(client_listen_ip_list.GetItem(i), client_listen_port);
+    for (uint32_t i = 0; i < file_server_ip_list.GetItemCnt(); i++) {
+        ConfigUtil::GetInstance()->AddAddress(file_server_ip_list.GetItem(i), client_listen_port);
     }
     
     uint16_t msg_server_listen_port = atoi(str_msg_server_listen_port);
@@ -100,7 +101,8 @@ int main(int argc, char* argv[])
 	if (ret == NETLIB_ERROR)
 		return ret;
 
-
+    CStrExplode client_listen_ip_list(str_client_listen_ip, ';');
+    //在8600上侦听客户端连接
 	for (uint32_t i = 0; i < client_listen_ip_list.GetItemCnt(); i++) {
 		ret = netlib_listen(client_listen_ip_list.GetItem(i), client_listen_port, FileClientConnCallback, NULL);
         if (ret == NETLIB_ERROR) {
@@ -111,6 +113,7 @@ int main(int argc, char* argv[])
         }
 	}
 
+    //在8601上侦听msg_server的连接
     ret = netlib_listen(str_msg_server_listen_ip, msg_server_listen_port, FileMsgServerConnCallback, NULL);
     if (ret == NETLIB_ERROR) {
         printf("listen %s:%d error!!\n", str_msg_server_listen_ip, msg_server_listen_port);

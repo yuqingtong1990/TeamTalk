@@ -58,9 +58,14 @@ void http_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pPar
     }
 }
 
+/**
+ *  login_server是TeamTalk的登录服务器，
+ *  负责分配一个负载较小的MsgServer给客户端使用,服务端口号是8080
+ **/
 int main(int argc, char* argv[])
 {
-	if ((argc == 2) && (strcmp(argv[1], "-v") == 0)) {
+	if ((argc == 2) && (strcmp(argv[1], "-v") == 0))
+    {
 		printf("Server Version: LoginServer/%s\n", VERSION);
 		printf("Server Build: %s %s\n", __DATE__, __TIME__);
 		return 0;
@@ -98,30 +103,37 @@ int main(int argc, char* argv[])
 
 	if (ret == NETLIB_ERROR)
 		return ret;
+    //在8080端口监听客户端连接
 	CStrExplode client_listen_ip_list(client_listen_ip, ';');
-	for (uint32_t i = 0; i < client_listen_ip_list.GetItemCnt(); i++) {
+	for (uint32_t i = 0; i < client_listen_ip_list.GetItemCnt(); i++)
+    {
 		ret = netlib_listen(client_listen_ip_list.GetItem(i), client_port, client_callback, NULL);
 		if (ret == NETLIB_ERROR)
 			return ret;
 	}
 
+    //在8100上监听msg_server的连接
 	CStrExplode msg_server_listen_ip_list(msg_server_listen_ip, ';');
-	for (uint32_t i = 0; i < msg_server_listen_ip_list.GetItemCnt(); i++) {
+	for (uint32_t i = 0; i < msg_server_listen_ip_list.GetItemCnt(); i++)
+    {
 		ret = netlib_listen(msg_server_listen_ip_list.GetItem(i), msg_server_port, msg_serv_callback, NULL);
 		if (ret == NETLIB_ERROR)
 			return ret;
 	}
     
+    //在8080上监听客户端http连接
     CStrExplode http_listen_ip_list(http_listen_ip, ';');
-    for (uint32_t i = 0; i < http_listen_ip_list.GetItemCnt(); i++) {
+    for (uint32_t i = 0; i < http_listen_ip_list.GetItemCnt(); i++)
+    {
         ret = netlib_listen(http_listen_ip_list.GetItem(i), http_port, http_callback, NULL);
         if (ret == NETLIB_ERROR)
             return ret;
     }
     
 
-			printf("server start listen on:\nFor client %s:%d\nFor MsgServer: %s:%d\nFor http:%s:%d\n",
-			client_listen_ip, client_port, msg_server_listen_ip, msg_server_port, http_listen_ip, http_port);
+    printf("server start listen on:\nFor client %s:%d\nFor MsgServer: %s:%d\nFor http:%s:%d\n",
+	       client_listen_ip, client_port, msg_server_listen_ip, msg_server_port, http_listen_ip, http_port);
+
 	init_login_conn();
     init_http_conn();
 

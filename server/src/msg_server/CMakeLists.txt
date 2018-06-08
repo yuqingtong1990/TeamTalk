@@ -4,7 +4,7 @@ PROJECT(msgserver)
 AUX_SOURCE_DIRECTORY(./ SRC_LIST)
 
 #SET(LIBRARY_OUTPUT_PATH ./)
-SET(EXECUTABLE_OUTPUT_PATH  ./)
+SET(EXECUTABLE_OUTPUT_PATH  ../bin)
 if(APPLE)
     SET(PB_LIB_DIR ../base/pb/lib/mac)
     SET(SECURITY_LIB_DIR ../base/security/lib/mac)
@@ -19,7 +19,7 @@ ADD_DEFINITIONS( -g -W -Wall -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DAC_HAS_INFO
 -DAC_HAS_DEBUG -DLINUX_DAEMON -std=c++11)
 
 INCLUDE_DIRECTORIES(./ ../base ../base/pb/protocol ../base/pb/ ../base/security/)
-LINK_DIRECTORIES(./ ../base ${PB_LIB_DIR} ../base/slog/lib ${SECURITY_LIB_DIR})
+LINK_DIRECTORIES(./ ../bin ${PB_LIB_DIR} ../base/slog/lib ${SECURITY_LIB_DIR})
 
 #ADD_XXXX必须在TARGET_LINK_LIBRARIES前面，否则会报错
 #ADD_LIBRARY(${PROJECTNAME} SHARED/STATIC ${SRC_LIST})

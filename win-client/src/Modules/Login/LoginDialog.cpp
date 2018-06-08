@@ -228,7 +228,9 @@ void LoginDialog::OnHttpCallbackOperation(std::shared_ptr<void> param)
 void LoginDialog::OnOperationCallback(std::shared_ptr<void> param)
 {
 	LoginParam* pLoginParam = (LoginParam*)param.get();
-	if (LOGIN_OK == pLoginParam->result)	//登陆成功
+
+
+    if (LOGIN_OK == pLoginParam->result)	//登陆成功
 	{
 		Close(IDOK);
 

@@ -239,10 +239,10 @@ BOOL DatabaseModule_Impl::sqlBatchInsertMessage(IN std::list<MessageEntity>& msg
 			MessageEntity msg = *iter;
 			if (msg.msgId <= 0)//非法的msg消息不用存储
 			{
-				std::string msgDecrptyCnt;
-				DECRYPT_MSG(msg.content,msgDecrptyCnt);
-				LOG__(ERR, _T("msgid <= 0, msgid:%d msg_content:%s Don't save to DB!")
-					, msg.msgId, util::stringToCString(msgDecrptyCnt));
+				//由于窗口抖动和图片消息没有用base64编码，会导致这里解密失败，导致程序程序崩溃，暂且注释掉，by zhangyl 2017.05.15
+                //std::string msgDecrptyCnt;
+				//DECRYPT_MSG(msg.content,msgDecrptyCnt);
+				//LOG__(ERR, _T("msgid <= 0, msgid:%d msg_content:%s Don't save to DB!"), msg.msgId, util::stringToCString(msgDecrptyCnt));
 				continue;
 			}
 			CppSQLite3Statement stmt = m_pSqliteDB->compileStatement(insertMessageSql.c_str());

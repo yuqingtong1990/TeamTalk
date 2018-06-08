@@ -98,6 +98,7 @@ void FileMsgServerConn::HandlePdu(CImPdu* pdu) {
         case CID_OTHER_FILE_TRANSFER_REQ:
             _HandleMsgFileTransferReq(pdu);
             break ;
+           //msg_server连接file_server成功以后发来查询file_server的ip地址的命令号
         case CID_OTHER_FILE_SERVER_IP_REQ:
             _HandleGetServerAddressReq(pdu);
             break;

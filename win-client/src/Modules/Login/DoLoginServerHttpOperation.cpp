@@ -29,6 +29,7 @@ void DoLoginServerHttpOperation::processOpertion()
 	pPamram->resMsg = util::getMultilingual()->getStringById(_T("STRID_LOGINDIALOG_LOGIN_HTTP_DEFERROR"));
 	Http::HttpResponse	response;
 	Http::HttpClient	client;
+    //¶ÔÓÚµÇÂ¼£ºurl=http://192.168.226.128:8080/msg_server
 	Http::HttpRequest	request("get", url);
 	if (!client.execute(&request, &response))
 	{
@@ -39,6 +40,18 @@ void DoLoginServerHttpOperation::processOpertion()
 		client.killSelf();
 		return;
 	}
+    /**
+        {
+           "backupIP" : "localhost",
+           "code" : 0,
+           "discovery" : "http://127.0.0.1/api/discovery",
+           "msfsBackup" : "http://127.0.0.1:8700/",
+           "msfsPrior" : "http://127.0.0.1:8700/",
+           "msg" : "",
+           "port" : "8000",
+           "priorIP" : "localhost"
+        }
+     */
 	std::string body = response.getBody();
 	client.killSelf();
 	//json½âÎö

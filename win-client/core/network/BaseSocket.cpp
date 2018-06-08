@@ -283,7 +283,7 @@ void CBaseSocket::_SetAddr(const char* ip, const uint16_t port, sockaddr_in* pAd
 	memset(pAddr, 0, sizeof(sockaddr_in));
 	pAddr->sin_family = AF_INET;
 	pAddr->sin_port = htons(port);
-	pAddr->sin_addr.s_addr = inet_addr(ip);
+    pAddr->sin_addr.s_addr = inet_addr(ip);
 	if (pAddr->sin_addr.s_addr == INADDR_NONE)
 	{
 		hostent* host = gethostbyname(ip);

@@ -676,6 +676,7 @@ int CacheManager::Init()
 {
 	CConfigFileReader config_file("dbproxyserver.conf");
 
+    //CacheInstances=unread,group_set,token,sync,group_member
 	char* cache_instances = config_file.GetConfigName("CacheInstances");
 	if (!cache_instances) {
 		log("not configure CacheIntance");

@@ -169,6 +169,7 @@ int main(int argc, char* argv[])
     if (ret == NETLIB_ERROR)
         return ret;
 
+    //在8700端口监听连接
     CStrExplode listen_ip_list(listen_ip, ';');
     for (uint32_t i = 0; i < listen_ip_list.GetItemCnt(); i++)
     {

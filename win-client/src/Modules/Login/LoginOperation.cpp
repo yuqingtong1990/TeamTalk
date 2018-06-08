@@ -44,6 +44,7 @@ void LoginOperation::processOpertion()
 	module::TTConfig* pCfg = module::getSysConfigModule()->getSystemConfig();
 	CString server = util::stringToCString(pCfg->msgSevPriorIP);
 	LOG__(APP, _T("MsgServeIp:%s,Port:%d"), server, pCfg->msgServPort);
+    //8000¶Ë¿Ú
 	IM::Login::IMLoginRes* pImLoginResp = (IM::Login::IMLoginRes*)module::getTcpClientModule()
 		->doLogin(server, pCfg->msgServPort,m_loginParam.csUserName,m_loginParam.password);
 	if (0 == pImLoginResp || pImLoginResp->result_code() != IM::BaseDefine::REFUSE_REASON_NONE 

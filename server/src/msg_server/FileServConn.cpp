@@ -139,6 +139,7 @@ void CFileServConn::OnConfirm()
 	m_connect_time = get_tick_count();
 	g_file_server_list[m_serv_idx].reconnect_cnt = MIN_RECONNECT_CNT / 2;
     
+    //连上file_server以后，给file_server发送获取ip地址的数据包
     IM::Server::IMFileServerIPReq msg;
     CImPdu pdu;
     pdu.SetPBMsg(&msg);

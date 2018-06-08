@@ -229,7 +229,7 @@ int CDBConn::Init()
 	mysql_options(m_mysql, MYSQL_OPT_RECONNECT, &reconnect);
 	mysql_options(m_mysql, MYSQL_SET_CHARSET_NAME, "utf8mb4");
 
-	if (!mysql_real_connect(m_mysql, m_pDBPool->GetDBServerIP(), m_pDBPool->GetUsername(), m_pDBPool->GetPasswrod(),
+	if (!mysql_real_connect(m_mysql, m_pDBPool->GetDBServerIP(), m_pDBPool->GetUsername(), ""/*m_pDBPool->GetPasswrod()*/,
 			m_pDBPool->GetDBName(), m_pDBPool->GetDBServerPort(), NULL, 0)) {
 		log("mysql_real_connect failed: %s", mysql_error(m_mysql));
 		return 2;
@@ -402,7 +402,8 @@ CDBManager::~CDBManager()
 
 CDBManager* CDBManager::getInstance()
 {
-	if (!s_db_manager) {
+	if (!s_db_manager) 
+    {
 		s_db_manager = new CDBManager();
 		if (s_db_manager->Init()) {
 			delete s_db_manager;
@@ -420,7 +421,7 @@ CDBManager* CDBManager::getInstance()
 int CDBManager::Init()
 {
 	CConfigFileReader config_file("dbproxyserver.conf");
-
+    //DBInstances=teamtalk_master,teamtalk_slave
 	char* db_instances = config_file.GetConfigName("DBInstances");
 
 	if (!db_instances) {
@@ -460,7 +461,8 @@ int CDBManager::Init()
 		int db_port = atoi(str_db_port);
         int db_maxconncnt = atoi(str_maxconncnt);
 		CDBPool* pDBPool = new CDBPool(pool_name, db_host, db_port, db_username, db_password, db_dbname, db_maxconncnt);
-		if (pDBPool->Init()) {
+		if (pDBPool->Init()) 
+        {
 			log("init db instance failed: %s", pool_name);
 			return 3;
 		}

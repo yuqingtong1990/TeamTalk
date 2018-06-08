@@ -174,6 +174,8 @@ void CRouteServConn::OnConfirm()
 		update_master_route_serv_conn();
 	}
 
+    //连接route_server成功以后，给route_server发包告诉当前登录在本msg_server上有哪些
+    //用户（用户id、用户状态、用户客户端类型）
 	list<user_stat_t> online_user_list;
     CImUserManager::GetInstance()->GetOnlineUserInfo(&online_user_list);
     IM::Server::IMOnlineUserInfo msg;

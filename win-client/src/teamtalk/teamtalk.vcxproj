@@ -151,7 +151,9 @@
     <Xml Include="..\..\bin\teamtalk\gui\EmotionDialog\QSBFace.xml" />
     <Xml Include="..\..\bin\teamtalk\gui\FileTransferDialog\FileTransferDialog.xml" />
     <Xml Include="..\..\bin\teamtalk\gui\FileTransferDialog\FileTransferListItem.xml" />
-    <Xml Include="..\..\bin\teamtalk\gui\LoginDialog\LoginDialog.xml" />
+    <Xml Include="..\..\bin\teamtalk\gui\LoginDialog\LoginDialog.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="..\..\bin\teamtalk\gui\MainDialog\eaUserListItem.xml" />
     <Xml Include="..\..\bin\teamtalk\gui\MainDialog\groupListItem.xml" />
     <Xml Include="..\..\bin\teamtalk\gui\MainDialog\MainDialog.xml" />

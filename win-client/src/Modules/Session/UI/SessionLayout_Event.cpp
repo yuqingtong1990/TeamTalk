@@ -125,10 +125,17 @@ void SessionLayout::Notify(TNotifyUI& msg)
             {
                 wchar_t szWndName[MAX_PATH] = { 0 };
                 GetClassName(hWnd, szWndName, MAX_PATH);
+#ifdef _DEBUG
+                if (_wcsicmp(szWndName, L"TeamTalkMainDialog_debug"))
+                {
+                    continue;
+                }
+#elif
                 if (_wcsicmp(szWndName, L"TeamTalkMainDialog"))
                 {
                     continue;
                 }
+#endif
 
                 DWORD dwProcessId = 0;
                 GetWindowThreadProcessId(hWnd, &dwProcessId);

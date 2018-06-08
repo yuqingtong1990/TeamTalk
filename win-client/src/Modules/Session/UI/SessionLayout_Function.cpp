@@ -106,7 +106,13 @@ void SessionLayout::_DisplaySysMsg(IN CString strID)
 {
 	MessageEntity msg;
 	CString csTip = util::getMultilingual()->getStringById(strID);
-	msg.content = util::cStringToString(csTip);
+
+    //为了修复发送窗口抖动导致程序崩溃的bug，by zhangyl 2017.05.15 begin
+    //std::string msgEncrypt;
+    //ENCRYPT_MSG(util::cStringToString(csTip), msgEncrypt);
+    //msg.content = msgEncrypt;
+    //为了修复发送窗口抖动导致程序崩溃的bug，by zhangyl 2017.05.15 end
+    msg.content = util::cStringToString(csTip);
 	msg.sessionId = m_sId;
 	msg.talkerSid = module::getSysConfigModule()->userID();
 	msg.msgRenderType = MESSAGE_RENDERTYPE_SYSTEMTIPS;

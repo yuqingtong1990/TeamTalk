@@ -37,7 +37,8 @@ void msg_serv_callback(void* callback_data, uint8_t msg, uint32_t handle, void* 
 
 int main(int argc, char* argv[])
 {
-	if ((argc == 2) && (strcmp(argv[1], "-v") == 0)) {
+	if ((argc == 2) && (strcmp(argv[1], "-v") == 0))
+    {
 //		printf("Server Version: MsgServer/%s\n", VERSION);
 		printf("Server Build: %s %s\n", __DATE__, __TIME__);
 		return 0;
@@ -121,6 +122,7 @@ int main(int argc, char* argv[])
 	if (ret == NETLIB_ERROR)
 		return ret;
 
+    //在8000端口号上侦听客户端连接
 	CStrExplode listen_ip_list(listen_ip, ';');
 	for (uint32_t i = 0; i < listen_ip_list.GetItemCnt(); i++) {
 		ret = netlib_listen(listen_ip_list.GetItem(i), listen_port, msg_serv_callback, NULL);

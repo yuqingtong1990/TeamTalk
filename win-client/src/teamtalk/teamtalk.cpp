@@ -47,18 +47,20 @@ BOOL CteamtalkApp::InitInstance()
 	}
 	AfxEnableControlContainer();
 
-	if (_IsHaveInstance())
-	{
-		LOG__(ERR, _T("Had one instance,this will exit"));
-		HWND hwndMain = FindWindow(_T("TeamTalkMainDialog"), NULL);
-		if (hwndMain)
-		{
-			::SendMessage(hwndMain, WM_START_MOGUTALKINSTANCE, NULL, NULL);
-		}
-		return FALSE;
-	}
+    //为了调试方便，暂且注释掉
+	//if (_IsHaveInstance())
+	//{
+	//	LOG__(ERR, _T("Had one instance,this will exit"));
+	//	HWND hwndMain = FindWindow(_T("TeamTalkMainDialog"), NULL);
+	//	if (hwndMain)
+	//	{
+	//		::SendMessage(hwndMain, WM_START_MOGUTALKINSTANCE, NULL, NULL);
+	//	}
+	//	return FALSE;
+	//}
 
 	//start imcore lib
+    //在这里启动任务队列和网络IO线程
 	if (!imcore::IMLibCoreRunEvent())
 	{
 		LOG__(ERR, _T("start imcore lib failed!"));
@@ -66,6 +68,7 @@ BOOL CteamtalkApp::InitInstance()
 	LOG__(APP, _T("start imcore lib done"));
 
 	//start ui event
+    //在这里创建代理窗口并启动定时器定时处理任务
 	if (module::getEventManager()->startup() != imcore::IMCORE_OK)
 	{
 		LOG__(ERR, _T("start ui event failed"));
